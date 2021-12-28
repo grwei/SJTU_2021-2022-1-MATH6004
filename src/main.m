@@ -52,13 +52,20 @@ Q3_x_nodes = -1:2/10:1;
 for k = 0:10
     Q3_L_10 = Q3_L_10 + 1./(1 + 25 * Q3_x_nodes(k+1).^2) .* Q3_interp_base(x,k,10);
 end
-Q3_int_f = 1/10 * (1/(1+25) + 2*sum(1 ./ (1 + 25 * Q3_x_nodes(2:10).^2)) + 1/(1+25));
+Q3_I10_f = 1/10 * (1/(1+25) + 2*sum(1 ./ (1 + 25 * Q3_x_nodes(2:10).^2)) + 1/(1+25));
 Q3_I_f = atan(5) * 2 / 5;
-Q3_int_err = Q3_int_f - Q3_I_f;
+Q3_int_err = Q3_I10_f - Q3_I_f;
 
 %% Q4
 
-Q4_x_nodes = -1:2/10:1;
+h = 2/10;
+Q4_x_nodes = -1:h:1;
+Q4_I10_f = 0;
+for k = 1:10
+    Q4_I10_f = Q4_I10_f + h/2 * sum(Q4_gauss_f([-sqrt(3)/3,sqrt(3)/3],k)); 
+end
+Q4_I_f = atan(5) * 2 / 5;
+Q4_int_err = Q4_I10_f - Q4_I_f;
 
 %% 绘图
 
@@ -153,4 +160,18 @@ function output = Q3_interp_base(x,k,n)
         output(idx_left) = (x(idx_left) - x_nodes(k-1+1)) ./ (x_nodes(k+1) - x_nodes(k-1+1));
         output(idx_right) = (x(idx_right) - x_nodes(k+1+1)) ./ (x_nodes(k+1) - x_nodes(k+1+1));
     end
+end
+
+%% Q4
+
+function output = Q4_gauss_f(x,k,n,a,b)
+    arguments
+        x
+        k double = 1
+        n double = 10
+        a double = -1
+        b double = 1
+    end
+    h = (b-a) / n;
+    output = 1 ./ (1 + 25 * (h/2*x + a + (k-1/2)*h).^2);
 end
