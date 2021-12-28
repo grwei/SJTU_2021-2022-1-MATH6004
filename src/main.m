@@ -77,7 +77,7 @@ xlabel("\fontname{Times New Roman} \fontsize{10} \it x")
 ylabel("\fontname{Times New Roman} \fontsize{10} \it y")
 legend( h, '$$f(x) = \frac{1}{1 + 25 x^2}$$','$$L_{10}^{(1)}(x) = \sum_{k = 0}^{10} f(x_k) l_k^{(1)}(x)$$','Location', 'north', 'Interpreter', 'latex','fontsize',10 );
 legend('boxoff')
-title(sprintf("\\fontname{Times New Roman} \\fontsize{10} \\bf polynomial interpolation-Lagrange"))
+title(sprintf("\\fontname{Times New Roman} \\fontsize{10} \\bf polynomial interpolation: equidistant node"))
 exportgraphics(gca,'../doc/fig/Q1.emf','BackgroundColor','none','ContentType','auto','Resolution',800);
 
 %% Q2
@@ -88,7 +88,7 @@ xlabel("\fontname{Times New Roman} \fontsize{10} \it x")
 ylabel("\fontname{Times New Roman} \fontsize{10} \it y")
 legend( h, '$$f(x) = \frac{1}{1 + 25 x^2}$$','$$L_{10}^{(2)}(x) = \sum_{k = 0}^{10} f(x_k) l_k^{(2)}(x)$$','Location', 'south', 'Interpreter', 'latex','fontsize',10 );
 legend('boxoff')
-title(sprintf("\\fontname{Times New Roman} \\fontsize{10} \\bf polynomial interpolation-Chebyshev"))
+title(sprintf("\\fontname{Times New Roman} \\fontsize{10} \\bf polynomial interpolation: Chebyshev"))
 exportgraphics(gca,'../doc/fig/Q2.emf','BackgroundColor','none','ContentType','auto','Resolution',800);
 
 %% Q3
