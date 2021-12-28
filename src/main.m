@@ -20,9 +20,10 @@ Q1_int_coef = zeros(size(Q1_x_nodes));
 for i = 0:length(Q1_int_coef)-1
     Q1_int_coef(i+1) = integral(@(x) Q1_interp_base(x,i,10),-1,1);
 end
-% 检查代数精度
 Q1_I10_f = sum(Q1_int_coef ./ (1 + 25 * Q1_x_nodes.^2)); %
 Q1_I_f = atan(5) * 2 / 5;
+Q1_int_err = Q1_I10_f - Q1_I_f;
+% 检查代数精度
 Q1_I10_x11 = sum(Q1_int_coef .* Q1_x_nodes.^11); % I_x11 = \int_{-1}^{1} x^11 dx = 0
 Q1_I10_x12 = sum(Q1_int_coef .* Q1_x_nodes.^12); % I_x12 = \int_{-1}^{1} x^12 dx = 2/13
 
@@ -34,6 +35,14 @@ Q2_x_nodes = cos(pi * (2 * (0:10) + 1) ./ (2*10 + 2));
 for k = 0:10
     Q2_L_10 = Q2_L_10 + 1./(1 + 25 * Q2_x_nodes(k+1).^2) .* Q2_interp_base(x,k,10);
 end
+% 插值型积分系数
+Q2_int_coef = zeros(size(Q2_x_nodes));
+for i = 0:length(Q2_int_coef)-1
+    Q2_int_coef(i+1) = integral(@(x) Q2_interp_base(x,i,10),-1,1);
+end
+Q2_I10_f = sum(Q2_int_coef ./ (1 + 25 * Q2_x_nodes.^2)); %
+Q2_I_f = atan(5) * 2 / 5;
+Q2_int_err = Q2_I10_f - Q2_I_f;
 
 %% Q3
 
@@ -43,6 +52,12 @@ Q3_x_nodes = -1:2/10:1;
 for k = 0:10
     Q3_L_10 = Q3_L_10 + 1./(1 + 25 * Q3_x_nodes(k+1).^2) .* Q3_interp_base(x,k,10);
 end
+Q3_int_f = 1/10 * (1/(1+25) + 2*sum(1 ./ (1 + 25 * Q3_x_nodes(2:10).^2)) + 1/(1+25));
+Q3_I_f = atan(5) * 2 / 5;
+Q3_int_err = Q3_int_f - Q3_I_f;
+
+%% Q4
+
 
 %% 绘图
 
