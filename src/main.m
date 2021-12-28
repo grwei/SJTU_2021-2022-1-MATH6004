@@ -58,6 +58,7 @@ Q3_int_err = Q3_int_f - Q3_I_f;
 
 %% Q4
 
+Q4_x_nodes = -1:2/10:1;
 
 %% 绘图
 
